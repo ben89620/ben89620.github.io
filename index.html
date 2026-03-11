@@ -95,6 +95,51 @@ color:#94a3b8;
 margin-top:10px;
 }
 
+/* Modal 背景 */
+.modal {
+  display: none; /* 預設隱藏 */
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(15, 23, 42, 0.9); /* 半透明深藍 */
+  animation: fadeIn 0.3s;
+}
+
+/* Modal 內容 */
+.modal-content {
+  background-color: #1e293b;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 600px;
+  color: white;
+  animation: slideDown 0.3s;
+}
+
+/* 關閉按鈕 */
+.close {
+  color: #38bdf8;
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes slideDown {
+  from {transform: translateY(-20px);}
+  to {transform: translateY(0);}
+}
+  
 </style>
 
 </head>
@@ -137,39 +182,87 @@ Redfish automation, and large scale compute environments.
 
 <div class="skills">
 
-<div class="skill-card">
+<div class="skill-card" data-skill="Networking">
 Networking
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill="Kubernetes">
 Kubernetes
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill="Docker">
 Docker
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill="Python">
 Python
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill="Go">
 Go
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill="LLM">
 LLM
 </div>
 
-<div class="skill-card">
+<div class="skill-card" data-skill="Computer Vision">
 Computer Vision
 </div>
 
 </div>
 
+<!-- Modal -->
+<div id="skill-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3 id="modal-title"></h3>
+    <p id="modal-description"></p>
+  </div>
+</div>
+  
 </div>
 
+<script>
+const skillData = {
+  Networking: "設計 GPU/CPU/Storage Data Center 網路架構，並維護高效能集群。",
+  Kubernetes: "使用 Kubernetes 部署和管理大型 AI 集群，並自動化工作負載。",
+  Docker: "建立容器化環境，簡化應用程式部署與測試。",
+  Python: "開發自動化工具及數據分析程式，串接 Redfish 與 Slurm API。",
+  Go: "使用 Go 開發 Giga Pod 管理工具，提高集群管理效率。",
+  LLM: "參與大型語言模型部署與測試，優化推論效能。",
+  ComputerVision: "開發電腦視覺專案，包括物件偵測與影像處理應用。"
+};
 
+// 取得元素
+const modal = document.getElementById("skill-modal");
+const modalTitle = document.getElementById("modal-title");
+const modalDescription = document.getElementById("modal-description");
+const closeBtn = document.querySelector(".close");
+
+// 點擊技能卡片
+document.querySelectorAll(".skill-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const skill = card.getAttribute("data-skill");
+    modalTitle.textContent = skill;
+    modalDescription.textContent = skillData[skill] || "No description available";
+    modal.style.display = "block";
+  });
+});
+
+// 點擊關閉按鈕
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// 點擊 Modal 背景也可以關閉
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+</script>
+  
 
 <div class="section">
 
