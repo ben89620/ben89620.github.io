@@ -218,6 +218,7 @@ Computer Vision
     <span class="close">&times;</span>
     <h3 id="modal-title"></h3>
     <p id="modal-description"></p>
+    <img id="modal-image" src="" alt="" style="width:100%; border-radius:10px; margin-bottom:15px;">
   </div>
 </div>
   
@@ -225,13 +226,34 @@ Computer Vision
 
 <script>
 const skillData = {
-  Networking: "設計 GPU/CPU/Storage Data Center 網路架構，並維護高效能集群。",
-  Kubernetes: "使用 Kubernetes 部署和管理大型 AI 集群，並自動化工作負載。",
-  Docker: "建立容器化環境，簡化應用程式部署與測試。",
-  Python: "開發自動化工具及數據分析程式，串接 Redfish 與 Slurm API。",
-  Go: "使用 Go 開發 Giga Pod 管理工具，提高集群管理效率。",
-  LLM: "參與大型語言模型部署與測試，優化推論效能。",
-  ComputerVision: "開發電腦視覺專案，包括物件偵測與影像處理應用。"
+  Networking: {
+    description: "設計 GPU/CPU/Storage Data Center 網路架構，並維護高效能集群。",
+    image: "images/networking.png"
+  },
+  Kubernetes: {
+    description: "使用 Kubernetes 部署和管理大型 AI 集群，並自動化工作負載。",
+    image: "images/kubernetes.png"
+  },
+  Docker: {
+    description: "建立容器化環境，簡化應用程式部署與測試。",
+    image: "images/docker.png"
+  },
+  Python: {
+    description: "開發自動化工具及數據分析程式，串接 Redfish 與 Slurm API。",
+    image: "images/python.png"
+  },
+  Go: {
+    description: "使用 Go 開發 Giga Pod 管理工具，提高集群管理效率。",
+    image: "images/go.png"
+  },
+  LLM: {
+    description: "參與大型語言模型部署與測試，優化推論效能。",
+    image: "images/llm.png"
+  },
+  ComputerVision: {
+    description: "開發電腦視覺專案，包括物件偵測與影像處理應用。",
+    image: "images/computer-vision.png"
+  }
 };
 
 // 取得元素
@@ -244,8 +266,12 @@ const closeBtn = document.querySelector(".close");
 document.querySelectorAll(".skill-card").forEach(card => {
   card.addEventListener("click", () => {
     const skill = card.getAttribute("data-skill");
+    const data = skillData[skill];
+    
     modalTitle.textContent = skill;
     modalDescription.textContent = skillData[skill] || "No description available";
+    modalImage.src = data.image || "";
+    modalImage.alt = skill;
     modal.style.display = "block";
   });
 });
