@@ -261,6 +261,7 @@ const modal = document.getElementById("skill-modal");
 const modalTitle = document.getElementById("modal-title");
 const modalDescription = document.getElementById("modal-description");
 const closeBtn = document.querySelector(".close");
+const modalImage = document.getElementById("modal-image");
 
 // 點擊技能卡片
 document.querySelectorAll(".skill-card").forEach(card => {
@@ -269,7 +270,7 @@ document.querySelectorAll(".skill-card").forEach(card => {
     const data = skillData[skill];
     
     modalTitle.textContent = skill;
-    modalDescription.textContent = skillData[skill] || "No description available";
+    modalDescription.textContent = data.description || "No description available";
     modalImage.src = data.image || "";
     modalImage.alt = skill;
     modal.style.display = "block";
